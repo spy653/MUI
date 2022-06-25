@@ -2,8 +2,7 @@ using System;
 
 namespace MUI
 {
-	// TODO: Rename to props maybe
-	// *: maybe make props a static struct?
+	// TODO: Move into TUI subclass in prep for GUI set.
 	public static class Core{
 		private static bool running = true;
 		public static bool Running 	{ get => running; set => running = value; }
@@ -38,7 +37,7 @@ namespace MUI
 			}
 			catch(Exception e)
 			{
-				TUI.Ask($"Entry failed. [{e}]","");
+				TUI.AskString($"Entry failed. [{e}]","");
 			}
 		}
 		
