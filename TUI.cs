@@ -1,12 +1,16 @@
 namespace MUI;
 
-public static class TUI{
+public static class TUI
+{
+	private static bool cursorVisible = false;
+	public  static bool CursorVisible { get=>cursorVisible; set=>cursorVisible=value; }
 
 	private static ConsoleColor uIColour = ConsoleColor.White;
-	public static ConsoleColor UIColour { get => uIColour; set => uIColour = value; }
+	public  static ConsoleColor UIColour { get => uIColour; set => uIColour = value; }
 
 	// TODO: investigate improved line wrapping
-	public static void Message(string text = "", uint level = 0, bool invert = false){
+	public static void Message(string text = "", uint level = 0, bool invert = false)
+	{
 		ConsoleColor targetColour = level switch
 		{
 			1 => ConsoleColor.Green,
@@ -24,7 +28,8 @@ public static class TUI{
 	}
 
 	// TODO: tests for this.
-	public static string Bar(double count, double total, uint width = 0){
+	public static string Bar(double count, double total, uint width = 0)
+	{
 		if(width==0)
 		{width = (uint)Console.WindowWidth;}
 		width = width-=2;
@@ -33,7 +38,8 @@ public static class TUI{
 		return $"[{bar.PadRight((int)width)}]";
 	}
 
-	public static void Write(string text){
+	public static void Write(string text)
+	{
 		try{
 			if(text.Length>=Console.WindowWidth)
 			{
@@ -63,21 +69,23 @@ public static class TUI{
 
 	public static string AskString(string text ="", object input =null, uint level =4, bool inline =false)
 	{
-		return Ask(text,input.ToString(),level,inline);			
+		return Ask(text,input?.ToString(),level,inline);			
 	}
 
 	public static int AskInt(string text ="", object input =null, uint level =4, bool inline =false)
 	{
-		return int.Parse(Ask(text,input.ToString(),level,inline));
+		return int.Parse(Ask(text,input?.ToString(),level,inline));
 	}
 
 	public static uint AskUint(string text ="", object input =null, uint level =4, bool inline =false)
 	{
-		return uint.Parse(Ask(text,input.ToString(),level,inline));
+		return uint.Parse(Ask(text,input?.ToString(),level,inline));
 	}
 
-	public static void 		Reset(){
+	public static void 		Reset()
+	{
 		Console.ForegroundColor = UIColour;
 		Console.BackgroundColor = ConsoleColor.Black;
+		Console.CursorVisible = CursorVisible;
 	}
 }

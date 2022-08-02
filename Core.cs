@@ -1,8 +1,5 @@
-global using System;
-
 namespace MUI;
 
-// TODO: Move into TUI subclass in prep for GUI set.
 public static class Core{
 	private static bool running = true;
 	public static bool Running 	{ get => running; set => running = value; }
@@ -19,14 +16,12 @@ public static class Core{
 	private static State state 	= null;
 	public static State State 	{ get => state; set{Input.Selection=0; state=value;} }
 
-	public static void Prime(){}
-
 	public static void 	Entry(){
 		try{
-			Console.CursorVisible = false;
-			
 			State = Root;
 			Running = true;
+
+			TUI.Reset();
 
 			while(Running)
 			{
@@ -38,14 +33,8 @@ public static class Core{
 		}
 		catch(Exception e)
 		{
-			TUI.AskString($"Entry failed.");
-			TUI.Message($"{e}");
+			TUI.Message($"Entry failed. {e}",3,true);
+			TUI.AskString("[Enter to Continue]");
 		}
-	}
-	
-	// DEAD: Kill this.
-	public static void 	Entry(State root){
-		Root = root;
-		Entry();
 	}
 }
