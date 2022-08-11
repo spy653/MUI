@@ -63,17 +63,17 @@ public static class TUI{
 
 	public static string AskString(string text ="", object input =null, uint level =4, bool inline =false)
 	{
-		return Ask(text,input.ToString(),level,inline);			
+		return Ask(text,input?.ToString(),level,inline);			
 	}
 
 	public static int AskInt(string text ="", object input =null, uint level =4, bool inline =false)
 	{
-		return int.Parse(Ask(text,input.ToString(),level,inline));
+		return int.Parse(Ask(text,input?.ToString(),level,inline));
 	}
 
 	public static uint AskUint(string text ="", object input =null, uint level =4, bool inline =false)
 	{
-		return uint.Parse(Ask(text,input.ToString(),level,inline));
+		return uint.Parse(Ask(text,input?.ToString(),level,inline));
 	}
 
 	public static void 		Reset(){
