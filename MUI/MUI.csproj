@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <using Include="System"/>
+    <using Include="System" />
   </ItemGroup>
 
 </Project>

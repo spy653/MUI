@@ -8,8 +8,10 @@ public class State
 	public string 			Info	= "";
 	public List<NavOption> 	Options	= new ();
 	public Action 			Update	= ()=>{};
+	public List<object>     Args    = new ();
 
-	public class NavOption{
+	public class NavOption
+	{
 		public string 			Text = "";
 		public Action 			Function = ()=>{};
 
@@ -26,7 +28,8 @@ public class State
 		}
 	}
 
-	public void Draw(){
+	public void Draw()
+	{
 		Console.Clear();	
 		TUI.Message($" [{Core.Title}] [{Header}] {Core.Info}",4,true);
 		TUI.Message(Info, 4);
@@ -34,9 +37,7 @@ public class State
 
 		foreach(NavOption n in Options)
 		{	
-			TUI.Message(Options.IndexOf(n)+1+"| "+n.Text, 4, Options.IndexOf(n)==(Input.Selection%Options.Count));	
+			TUI.Message(Options.IndexOf(n)+1+" | "+n.Text, 4, Options.IndexOf(n)==(Input.Selection%Options.Count));	
 		}
-
-		TUI.Message();
 	}
 }

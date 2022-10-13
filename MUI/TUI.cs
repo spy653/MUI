@@ -2,11 +2,9 @@ namespace MUI;
 
 public static class TUI
 {
-	private static bool cursorVisible = false;
-	public  static bool CursorVisible { get=>cursorVisible; set=>cursorVisible=value; }
-
-	private static ConsoleColor uIColour = ConsoleColor.White;
-	public  static ConsoleColor UIColour { get => uIColour; set => uIColour = value; }
+	public static bool CursorVisible { get; set; } = false;
+	public static ConsoleColor BackgroundColour { get; set; } = ConsoleColor.Black;
+	public static ConsoleColor ForegroundColour { get; set; } = ConsoleColor.White;
 
 	// TODO: investigate improved line wrapping
 	public static void Message(string text = "", uint level = 0, bool invert = false)
@@ -16,12 +14,12 @@ public static class TUI
 			1 => ConsoleColor.Green,
 			2 => ConsoleColor.Yellow,
 			3 => ConsoleColor.Red,
-			4 => UIColour,
+			4 => ForegroundColour,
 			_ => ConsoleColor.White
 		};
 
-		Console.ForegroundColor = invert ? ConsoleColor.Black : targetColour;
-		Console.BackgroundColor = invert ? targetColour : ConsoleColor.Black;
+		Console.ForegroundColor = invert ? BackgroundColour : targetColour;
+		Console.BackgroundColor = invert ? targetColour : BackgroundColour;
 		
 		Write(text);
 		Reset();
@@ -67,25 +65,25 @@ public static class TUI
 		return output;
 	}
 
-	public static string AskString(string text ="", object input =null, uint level =4, bool inline =false)
+	public static string AskString(string text ="", object input =null, uint level =4, bool inline =true)
 	{
 		return Ask(text,input?.ToString(),level,inline);			
 	}
 
-	public static int AskInt(string text ="", object input =null, uint level =4, bool inline =false)
+	public static int AskInt(string text ="", object input =null, uint level =4, bool inline =true)
 	{
 		return int.Parse(Ask(text,input?.ToString(),level,inline));
 	}
 
-	public static uint AskUint(string text ="", object input =null, uint level =4, bool inline =false)
+	public static uint AskUint(string text ="", object input =null, uint level =4, bool inline =true)
 	{
 		return uint.Parse(Ask(text,input?.ToString(),level,inline));
 	}
 
 	public static void 		Reset()
 	{
-		Console.ForegroundColor = UIColour;
-		Console.BackgroundColor = ConsoleColor.Black;
+		Console.ForegroundColor = ForegroundColour;
+		Console.BackgroundColor = BackgroundColour;
 		Console.CursorVisible = CursorVisible;
 	}
 }
