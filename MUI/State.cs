@@ -8,13 +8,37 @@ public class State
 	public string 			Info	= "";
 	public List<NavOption> 	Options	= new ();
 	public Action 			Update	= ()=>{};
-	public List<object>     Args    = new ();
+	public List<object>     Args    = new (){0};
+
+	public void		Enter()
+	{
+		try{
+			bool Running = true;
+
+			TUI.Reset();
+
+			while(Running)
+			{
+				Draw();
+				Update();
+				Input.Handle();
+				if(Running) Update();
+			}
+		}
+		catch(Exception e)
+		{
+			TUI.Message($"Entry failed.", 3, true);
+			Console.WriteLine(e);
+			TUI.AskString("[Enter to Continue]");
+		}
+	}
 
 	public class NavOption
 	{
-		public string 			Text = "";
-		public Action 			Function = ()=>{};
-
+		public string 		Text = "";
+		public Action 		Function = ()=>{};
+		
+		
 		public NavOption(string text = "")
 		{
 			Text = text;
@@ -33,11 +57,11 @@ public class State
 		Console.Clear();	
 		TUI.Message($" [{Core.Title}] [{Header}] {Core.Info}",4,true);
 		TUI.Message(Info, 4);
-		TUI.Message();
 
 		foreach(NavOption n in Options)
-		{	
-			TUI.Message(Options.IndexOf(n)+1+" | "+n.Text, 4, Options.IndexOf(n)==(Input.Selection%Options.Count));	
+		{
+			int i = Options.IndexOf(n);
+			TUI.Message($" {i+1} | "+n.Text, 4, i==(int)Args[0]%Options.Count);	
 		}
 	}
 }

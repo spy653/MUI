@@ -6,7 +6,6 @@ public static class TUI
 	public static ConsoleColor BackgroundColour { get; set; } = ConsoleColor.Black;
 	public static ConsoleColor ForegroundColour { get; set; } = ConsoleColor.White;
 
-	// TODO: investigate improved line wrapping
 	public static void Message(string text = "", uint level = 0, bool invert = false)
 	{
 		ConsoleColor targetColour = level switch

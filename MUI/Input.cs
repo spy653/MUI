@@ -4,8 +4,7 @@ namespace MUI;
 
 public static class Input
 {
-	public static uint Selection{ get; set; }
-	public static bool Selected { get; set; }
+	private static bool Selected { get; set; }
 
 	public static void 	Handle()
 	{
@@ -15,24 +14,20 @@ public static class Input
 		
 			switch(key)
 			{
-				default: break;
 				case ConsoleKey.UpArrow: 	
 				case ConsoleKey.W:
-					Selection--;
-					Selection %= (uint)Core.State.Options.Count;
+					Core.State.Args[0] = 1-(int)Core.State.Args[0]; 
 				break;
 				
 				case ConsoleKey.DownArrow: 	
 				case ConsoleKey.S:
-					Selection++;
-					Selection %= (uint)Core.State.Options.Count;
+					Core.State.Args[0] = 1+(int)Core.State.Args[0];
 				break;
 				
 				case ConsoleKey.LeftArrow: 	
 				case ConsoleKey.A: 			
 				case ConsoleKey.Backspace:	
-				case ConsoleKey.D0:			
-					Selection= 0;
+				case ConsoleKey.D0:
 					Core.State = Core.Root;
 				break;
 
@@ -47,27 +42,27 @@ public static class Input
 					Core.Running = false;
 				break;
 
-				case ConsoleKey.D1:			Selection = 0; break;
-				case ConsoleKey.D2:			Selection = 1; break;
-				case ConsoleKey.D3:			Selection = 2; break;
-				case ConsoleKey.D4:			Selection = 3; break;
-				case ConsoleKey.D5:			Selection = 4; break;
-				case ConsoleKey.D6:			Selection = 5; break;
-				case ConsoleKey.D7:			Selection = 6; break;
-				case ConsoleKey.D8:			Selection = 7; break;
-				case ConsoleKey.D9:			Selection = 8; break;
+				case ConsoleKey.D1:	Core.State.Args[0] = 0; break;
+				case ConsoleKey.D2:	Core.State.Args[0] = 1; break;
+				case ConsoleKey.D3:	Core.State.Args[0] = 2; break;
+				case ConsoleKey.D4:	Core.State.Args[0] = 3; break;
+				case ConsoleKey.D5:	Core.State.Args[0] = 4; break;
+				case ConsoleKey.D6:	Core.State.Args[0] = 5; break;
+				case ConsoleKey.D7:	Core.State.Args[0] = 6; break;
+				case ConsoleKey.D8:	Core.State.Args[0] = 7; break;
+				case ConsoleKey.D9:	Core.State.Args[0] = 8; break;
 			}
 		}
 		else
 		{
-			Thread.Sleep(250);
+			Thread.Sleep(200);
 		}
 
 		if(Selected && (Core.State.Options.Count>0))
 		{
 			try
 			{
-				Core.State.Options[(int)Selection%Core.State.Options.Count].Function();
+				Core.State.Options[(int)Core.State.Args[0]%Core.State.Options.Count].Function();
 			}
 			catch (Exception e)
 			{
