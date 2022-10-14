@@ -25,21 +25,21 @@ public static class Input
 				break;
 				
 				case ConsoleKey.LeftArrow: 	
-				case ConsoleKey.A: 			
-				case ConsoleKey.Backspace:	
+				case ConsoleKey.A:	
+				case ConsoleKey.Backspace:
 				case ConsoleKey.D0:
 					Core.State = Core.Root;
 				break;
 
 				case ConsoleKey.RightArrow: 
-				case ConsoleKey.D: 			
-				case ConsoleKey.Spacebar:	
+				case ConsoleKey.D: 
+				case ConsoleKey.Spacebar:
 				case ConsoleKey.Enter: 		
 					Selected = true; 
 				break;
 	
 				case ConsoleKey.Escape:		
-					Core.Running = false;
+					Core.State.Running = false;
 				break;
 
 				case ConsoleKey.D1:	Core.State.Args[0] = 0; break;

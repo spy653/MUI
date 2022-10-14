@@ -4,16 +4,18 @@ namespace MUI;
 
 public class State
 {
-	public string 			Header 	= "";
-	public string 			Info	= "";
-	public List<NavOption> 	Options	= new ();
-	public Action 			Update	= ()=>{};
-	public List<object>     Args    = new (){0};
+	public string          Header  = "";
+	public string          Info    = "";
+	public List<NavOption> Options = new ();
+	public Action          Update  = ()=>{};
+	public List<object>    Args    = new (){0};
+	
+	public bool			   Running = true;
 
 	public void		Enter()
 	{
 		try{
-			bool Running = true;
+			Running = true;
 
 			TUI.Reset();
 
