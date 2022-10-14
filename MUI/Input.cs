@@ -16,12 +16,12 @@ public static class Input
 			{
 				case ConsoleKey.UpArrow: 	
 				case ConsoleKey.W:
-					Core.State.Args[0] = 1-(int)Core.State.Args[0]; 
+					Core.State.Args[0] = (int)Core.State.Args[0]-1; 
 				break;
 				
 				case ConsoleKey.DownArrow: 	
 				case ConsoleKey.S:
-					Core.State.Args[0] = 1+(int)Core.State.Args[0];
+					Core.State.Args[0] = (int)Core.State.Args[0]+1;
 				break;
 				
 				case ConsoleKey.LeftArrow: 	
@@ -55,7 +55,7 @@ public static class Input
 		}
 		else
 		{
-			Thread.Sleep(200);
+			Thread.Sleep(100);
 		}
 
 		if(Selected && (Core.State.Options.Count>0))

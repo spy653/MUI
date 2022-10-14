@@ -16,7 +16,8 @@ public class State
 	{
 		try{
 			Running = true;
-
+			Core.State = this;
+			
 			TUI.Reset();
 
 			while(Running)
