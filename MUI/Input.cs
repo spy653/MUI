@@ -39,7 +39,7 @@ public static class Input
 				break;
 	
 				case ConsoleKey.Escape:		
-					Core.State.Running = false;
+					Core.Running = false;
 				break;
 
 				case ConsoleKey.D1:	Core.State.Args[0] = 0; break;

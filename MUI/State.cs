@@ -10,32 +10,6 @@ public class State
 	public Action          Update  = ()=>{};
 	public List<object>    Args    = new (){0};
 	
-	public bool			   Running = true;
-
-	public void		Enter()
-	{
-		try{
-			Running = true;
-			Core.State = this;
-			
-			TUI.Reset();
-
-			while(Running)
-			{
-				Draw();
-				Update();
-				Input.Handle();
-				if(Running) Update();
-			}
-		}
-		catch(Exception e)
-		{
-			TUI.Message($"Entry failed.", 3, true);
-			Console.WriteLine(e);
-			TUI.AskString("[Enter to Continue]");
-		}
-	}
-
 	public class NavOption
 	{
 		public string 		Text = "";
