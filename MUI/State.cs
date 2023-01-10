@@ -4,18 +4,19 @@ namespace MUI;
 
 public class State
 {
-	public string          Header  = "";
-	public string          Info    = "";
-	public List<NavOption> Options = new ();
-	public Action          Update  = ()=>{};
-	public List<object>    Args    = new (){0};
-	
+	public string			Header  = "";
+	public string			Info    = "";
+	public List<NavOption>	Options = new ();
+	public Action			Update  = ()=>{};
+	public List<object>		Args    = new (){0};
+	public bool				Running = true;
+
 	public class NavOption
 	{
 		public string 		Text = "";
 		public Action 		Function = ()=>{};
-		
-		
+
+
 		public NavOption(string text = "")
 		{
 			Text = text;
@@ -31,14 +32,14 @@ public class State
 
 	public void Draw()
 	{
-		Console.Clear();	
+		Console.Clear();
 		TUI.Message($" [{Core.Title}] [{Header}] {Core.Info}",4,true);
 		TUI.Message(Info, 4);
 
 		foreach(NavOption n in Options)
 		{
 			int i = Options.IndexOf(n);
-			TUI.Message($" {i+1} | "+n.Text, 4, i==(int)Args[0]%Options.Count);	
+			TUI.Message($" {i+1} | "+n.Text, 4, i==(int)Args[0]%Options.Count);
 		}
 	}
 }

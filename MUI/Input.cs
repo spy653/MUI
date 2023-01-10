@@ -11,35 +11,35 @@ public static class Input
 		if(Console.KeyAvailable)
 		{
 			ConsoleKey key = Console.ReadKey(true).Key;
-		
+
 			switch(key)
 			{
-				case ConsoleKey.UpArrow: 	
+				case ConsoleKey.UpArrow:
 				case ConsoleKey.W:
-					Core.State.Args[0] = (int)Core.State.Args[0]-1; 
+					Core.State.Args[0] = (int)Core.State.Args[0]-1;
 				break;
-				
-				case ConsoleKey.DownArrow: 	
+
+				case ConsoleKey.DownArrow:
 				case ConsoleKey.S:
 					Core.State.Args[0] = (int)Core.State.Args[0]+1;
 				break;
-				
-				case ConsoleKey.LeftArrow: 	
-				case ConsoleKey.A:	
+
+				case ConsoleKey.LeftArrow:
+				case ConsoleKey.A:
 				case ConsoleKey.Backspace:
 				case ConsoleKey.D0:
 					Core.State = Core.Root;
 				break;
 
-				case ConsoleKey.RightArrow: 
-				case ConsoleKey.D: 
+				case ConsoleKey.RightArrow:
+				case ConsoleKey.D:
 				case ConsoleKey.Spacebar:
-				case ConsoleKey.Enter: 		
-					Selected = true; 
+				case ConsoleKey.Enter:
+					Selected = true;
 				break;
-	
-				case ConsoleKey.Escape:		
-					Core.Running = false;
+
+				case ConsoleKey.Escape:
+					Core.State.Running = false;
 				break;
 
 				case ConsoleKey.D1:	Core.State.Args[0] = 0; break;
@@ -60,6 +60,7 @@ public static class Input
 
 		if(Selected && (Core.State.Options.Count>0))
 		{
+			Selected = false;
 			try
 			{
 				Core.State.Options[(int)Core.State.Args[0]%Core.State.Options.Count].Function();
@@ -70,7 +71,6 @@ public static class Input
 				Console.WriteLine(e);
 				TUI.AskString("[Enter to Continue]");
 			}
-			Selected = false;
 		}
 	}
 }

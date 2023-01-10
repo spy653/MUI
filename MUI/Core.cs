@@ -6,22 +6,21 @@ public static class Core{
 	public  static State  Root    { get; set; }
 	public static  State  State   { get; set; }
 
-	public static bool Running = true;
-	
 	public static void Enter(State state = null)
 	{
 		try{
 			State = state ?? Root;
-			Running = true;
-			
+
 			TUI.Reset();
 
-			while(Running)
+			while(State.Running)
 			{
 				State.Draw();
 				State.Update();
 				Input.Handle();
-				if(Running) State.Update();
+
+//				if(State.Running)
+//					State.Update();
 			}
 		}
 		catch(Exception e)
